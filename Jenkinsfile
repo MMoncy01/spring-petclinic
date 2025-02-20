@@ -27,13 +27,13 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh './mvnw clean install'
+                bat '.\\mvnw.cmd clean install'  // ✅ Use bat for Windows
             }
         }
 
         stage('Code Coverage with JaCoCo') {
             steps {
-                sh './mvnw jacoco:report'
+                bat '.\\mvnw.cmd jacoco:report'  // ✅ Use bat for Windows
             }
             post {
                 success {
