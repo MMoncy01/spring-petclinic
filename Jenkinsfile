@@ -1,4 +1,3 @@
- 
 pipeline {
     agent any
 
@@ -13,7 +12,16 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/YOUR_GITHUB_USERNAME/spring-petclinic.git'
+                script {
+                    checkout scm: [
+                        $class: 'GitSCM',
+                        branches: [[name: '*/main']],
+                        userRemoteConfigs: [[
+                            url: 'https://github.com/MMoncy01/spring-petclinic.git',
+                            credentialsId: 'github-credentials'
+                        ]]
+                    ]
+                }
             }
         }
 
